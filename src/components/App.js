@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import Post from './Post/Post.js';
 
 import './App.css';
 
@@ -19,11 +21,26 @@ class App extends Component {
   }
   
   componentDidMount() {
-
+    axios
+      .get(`https://practiceapi.devmountain.com/api/posts`)
+      .then( (res) => {
+        let data = res.data;
+        console.log(data);
+        this.setState({
+          posts: data
+        })
+      })
   }
 
-  updatePost() {
-  
+  updatePost(id, text) {
+    // Basically, the id and text of a post is unique, we need to use that specificity to update only certain posts. The {text} is what we want to update it to, so that goes in as a second parameter to the .put request.
+    axios
+    .put(`https://practiceapi.devmountain.com/api/posts/id=${id}/`, {text})
+    .then( (res) => {
+      this.setState({ posts: res.data })
+    })
+
+
   }
 
   deletePost() {
@@ -44,6 +61,12 @@ class App extends Component {
         <section className="App__content">
 
           <Compose />
+
+          {
+            posts.map( post => {
+              <Post key={ post.id } text={post.text} date={post.date} updatePostFn = {this.updatePost} id={post.id}/>
+            })
+          }
           
         </section>
       </div>

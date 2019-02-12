@@ -40,7 +40,7 @@ In this step, we'll use `axios` to fetch `posts` from the API and render them on
 * Use `axios` and the API documentation to fetch `posts` in the `componentDidMount` method.
   * Set the `posts` array returned from the API onto `posts` on `state`.
 * Import the `Post` component.
-* Underneathe the `Compose` component, map over `posts` on `state` and render a `Post` component for each `post`.
+* Underneath the `Compose` component, map over `posts` on `state` and render a `Post` component for each `post`.
   * Remember that React requires a unique key property when using a `map`.
 
 <details>
